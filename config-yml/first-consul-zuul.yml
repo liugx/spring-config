@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: zuul
+server:
+  port: 8090
+eureka:
+  instance: localhost
+  client:
+    security:
+      user:
+        name: user
+        password: 123456
+    service-url:
+      defaultZone: http://user:123456@localhost:8080/eureka/
+zuul:
+  host:
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 60000
+  routes:
+    api:
+      path: /api/order/**
+      serviceId: ORDER
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000
+ribbon:
+  ConnectionTimeout: 500
+  ReadTimeout: 2000
